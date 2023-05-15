@@ -4,6 +4,9 @@ var state = "";
 var country = "";
 var cityForecastContent = $("city-forecast-content");
 
+//api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+
 //take searched for city name and save it to local storage
     //display city name and date on results section
     //return relevent weather data
@@ -18,14 +21,28 @@ var cityForecastContent = $("city-forecast-content");
 // }
 
 //saving and displaying local storage jquery
-// $('.searchBtn').on('click', function() {
-//     console.log($(this).siblings('#search-input').val())
-//     var key = $(this).siblings('#past-search')
-//     var value = $(this).siblings('#search-input').val()
-//     localStorage.setItem(key, value);
-//   })
+$('.searchBtn').on('click', function() {
+    console.log($(this).siblings('#search-input').val())
+    var key = $(this).siblings('#past-search')
+    var value = $(this).siblings('#search-input').val()
+    localStorage.setItem(key, value);
+  })
 
-// $('.searchBtn').each(function() {
-//     var searchHist = $(this).attr('id');
-//     $(this).siblings('button').val(localStorage.getItem(searchHist));
-//   })
+$('.searchBtn').each(function() {
+    var searchHist = $(this).attr('id');
+    $(this).siblings('button').val(localStorage.getItem(searchHist));
+  })
+
+
+
+//perameters for search query
+//   function getParams() {
+//     // Get the search params out of the URL (i.e. `?q=london&format=photo`) and convert it to an array (i.e. ['?q=london', 'format=photo'])
+//     var searchParamsArr = document.location.search.split('&');
+  
+//     // Get the query and format values
+//     var query = searchParamsArr[0].split('=').pop();
+//     var format = searchParamsArr[1].split('=').pop();
+  
+//     searchApi(query, format);
+//   }
