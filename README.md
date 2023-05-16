@@ -15,6 +15,10 @@ N/A
 
 Users can utilize this web application by entering a city name into the search bar and clicking search. The current weather data for the searched for city will then display as well as the five-day forecast.
 
-![alt text](assets/images/screenshot.png)
+Deployed URL: https://nick-jda.github.io/Server-side-API-Weather-Dashboard/
+
+
+
+![alt text](./assets/images/nick-jda.github.io_Server-side-API-Weather-Dashboard_.png)
 
 ---
