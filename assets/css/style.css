@@ -6,10 +6,6 @@ body {
     background-color: #FFA07A;
 }
 
-.flex-width {
-    /*flex-basis: ;*/
-}
-
 aside {
     flex-basis: 30%;
 }
