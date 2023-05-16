@@ -1,0 +1,19 @@
+body {
+    background: linear-gradient(270deg, #FFA07A, #FFCDB8, #00D8FF);
+}
+
+.header {
+    background-color: #FFA07A;
+}
+
+.flex-width {
+    /*flex-basis: ;*/
+}
+
+aside {
+    flex-basis: 30%;
+}
+
+.result-box {
+    flex-basis: 65%;
+}

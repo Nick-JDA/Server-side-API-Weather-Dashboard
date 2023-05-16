@@ -1,11 +1,11 @@
 var apiKey = "2cf8696659dd95e4c36499af01e37d9c";
-var city = "";
-var state = "";
-var country = "";
-var cityForecastContent = $("city-forecast-content");
+var cityForecastContent = $("#city-forecast-content");
+var cityName = $('.location-city');
 // savedCities will either be the localstorage under the key "savedCities", if there is no localStorage, then it will be an empty array
 var savedCities = JSON.parse(localStorage.getItem('savedCities')) || [];
 // JSON.parse can used for objects OR arrays
+var fiveDayCast = $('#5dayCast');
+var weatherCont = $('#wehtercontainer');
 
 //https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
@@ -39,7 +39,7 @@ function searchAPI(query) {
 };
 
 function secondSearchAPI(lat, lon) {
-    var fetchURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+    var fetchURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
     fetch(fetchURL)
     .then(function (response) {
@@ -50,6 +50,7 @@ function secondSearchAPI(lat, lon) {
 })
 .then(function(results) {
 console.log(results);
+displayWeatherContent(results);
 // Create and append the daily forecast and the five day forecast
 })
 .catch(function (error) {
@@ -91,7 +92,7 @@ $('.searchBtn').on('click', function(event) {
   $('#past-searches').on('click', function(event) {
     // Added eventlistner to the div
     console.log(event);
-    // If the target tag that was clicked on is defined as a button, then it will run our api fetch
+    // If the target tag that was clicked on is defined as a button, then it will run api fetch
     if(event.target.localName === 'button') {
         // instead of capturing the input value, we capture the button text
         var value = event.target.textContent;
@@ -102,6 +103,30 @@ $('.searchBtn').on('click', function(event) {
 
 displayPastSearches();
 
+function displayWeatherContent(values) {
+    
+    var currentTime = values.list[0].dt_txt;
+    var todayDate = dayjs(currentTime).format('MM/DD/YYYY');
+    var h4El1 = $('<h4></h4>').text('Temp: ' + values.list[0].main.temp + "°C");
+    var h4El2 = $('<h4></h4>').text('Wind: ' + values.list[0].wind.speed);
+    var h4El3 = $('<h4></h4>').text('Humidity: ' + values.list[0].main.humidity);
+    cityForecastContent.append(h4El1, h4El2, h4El3);
+    cityName.text(values.city.name + " " + todayDate);
+
+    
+    
+    for (var index  = 7; index < values.list.length; index+=8) {
+        var Thyme = values.list[index].dt_txt;
+        var Date = dayjs(Thyme).format('MM/DD/YYYY');
+        var divMain = $('<div></div>');
+        var theDate = $('<h4></h4>').text(Date);
+        var pEl1 = $('<p></p>').text('Temp: ' + values.list[index].main.temp);
+        var pEl2 = $('<p></p>').text('Wind: ' + values.list[index].wind.speed);
+        var pEl3 = $('<p></p>').text('Humidity: ' + values.list[index].main.humidity);
+        fiveDayCast.append(divMain);
+        divMain.append(theDate, pEl1, pEl2, pEl3);
+    }
+}
 
 
 //perameters for search query
